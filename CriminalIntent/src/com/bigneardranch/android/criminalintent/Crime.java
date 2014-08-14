@@ -50,7 +50,7 @@ public class Crime {
 	}
 
 	public String getSimpleDate() {
-		String format = "EEEE, MMMM d, yyyy";
+		String format = "yyyy년, MMMM d일, EEEE - H시m분";
 		SimpleDateFormat date = new SimpleDateFormat(format);
 		return date.format(mDate);
 	}

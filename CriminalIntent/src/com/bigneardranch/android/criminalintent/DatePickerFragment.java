@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
@@ -32,7 +33,6 @@ public class DatePickerFragment extends DialogFragment {
 	private void sendResult(int resultCode){
 		if(getTargetFragment() == null)	// 타겟프래그먼트가 없으면 연결이고 뭐고 없으므로 아웃
 			return;
-		
 		Intent intent = new Intent();
 		intent.putExtra(EXTRA_DATE, mDate);
 		
@@ -51,6 +51,8 @@ public class DatePickerFragment extends DialogFragment {
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		final int hour = calendar.get(Calendar.HOUR);
+		final int minute = calendar.get(Calendar.MINUTE);
 		
 		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
 		DatePicker dp = (DatePicker)v.findViewById(R.id.dialog_date_datePicker);
@@ -60,7 +62,7 @@ public class DatePickerFragment extends DialogFragment {
 			// 이러면 회전이후에도 자신이 변경한 날짜가 초기화 되지 않고 그대로 디스플레이된다
 			@Override
 			public void onDateChanged(DatePicker view, int year, int month, int day) {
-				mDate = new GregorianCalendar(year,month,day).getTime();
+				mDate = new GregorianCalendar(year,month,day,hour,minute).getTime();
 				getArguments().putSerializable(EXTRA_DATE, mDate);
 			}
 		});

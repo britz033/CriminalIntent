@@ -8,5 +8,9 @@
     <string name="crime_solved_label">해결됨?</string>
     <string name="crime_title">범죄 리스트</string>
     <string name="date_picker_title">범죄 발생일자:</string>
+    <string name="time_picker_title">범죄 발생시각:</string>
+    <string name="select_dialog_title">범죄 발생 일자와 시간중 선택</string>
+    <string name="select_dialog_date">날짜</string>
+    <string name="select_dialog_time">시간</string>
 
 </resources>
