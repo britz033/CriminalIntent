@@ -12,5 +12,10 @@
     <string name="select_dialog_title">범죄 발생 일자와 시간중 선택</string>
     <string name="select_dialog_date">날짜</string>
     <string name="select_dialog_time">시간</string>
+    <string name="new_crime">새로운 범죄</string>
+    <string name="show_subtitle">서브타이틀 보기</string>
+    <string name="hide_subtitle">서브타이틀 감추기</string>
+    <string name="subtitle">뭔가 보이면 얘기하세요</string>
+    <string name="delete_crime">삭제</string>
 
 </resources>

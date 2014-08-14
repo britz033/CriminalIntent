@@ -3,15 +3,19 @@ package com.bigneardranch.android.criminalintent;
 import java.util.Date;
 import java.util.UUID;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,12 +61,33 @@ public class CrimeFragment extends Fragment {
 		UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
 		
 		mCrime = CrimeLab.get(getActivity()).getCrime(crimeId); 
-		
+		setHasOptionsMenu(true);
 	}
 	
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home :
+//			Intent intent = new Intent(getActivity(),CrimeListActivity.class);
+//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			if(NavUtils.getParentActivityName(getActivity()) != null){
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			return true;
+		default : return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_crime, container, false);
+		
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+			if(NavUtils.getParentActivityName(getActivity()) != null)
+				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 		
 		mTitleField = (EditText) v.findViewById(R.id.txt_crime_title);
 		mTitleField.setText(mCrime.getTitle());
